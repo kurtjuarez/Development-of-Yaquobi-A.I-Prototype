@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Ilocano Speech-to-Text Translator App</string>
+    <string name="enter_text">Enter text here.</string>
+    <string name="input_text">Inputted text here.</string>
+    <string name="output_text">Translated text here.</string>
+    <string name="english_title">English</string>
+    <string name="ilocano_title">Ilocano</string>
+    <string name="team_description_title">Team Description</string>
+    <string name="team_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus sem nec elit feugiat, a ultrices lorem sodales. Sed rutrum lorem augue, at pellentesque sapien malesuada ut. Aenean at interdum erat. Sed hendrerit quam ullamcorper nisi posuere tristique. Phasellus condimentum enim vitae convallis ultricies. Morbi lacinia egestas nisi, in auctor lorem dignissim sed. Nunc aliquam aliquam aliquam.</string>
+    <string name="team_leader">Team Leader</string>
+    <string name="documentation_lead">Documentation Lead</string>
+    <string name="lead_developer">Lead Developer</string>
+    <string name="ui_ux_developer">UI/UX Developer</string>
+    <string name="phone_number">+639123456789</string>
+    <string name="email_address">emailaddress@gmail.com</string>
+    <string name="facebook">Yaquobi A.I</string>
+</resources>
