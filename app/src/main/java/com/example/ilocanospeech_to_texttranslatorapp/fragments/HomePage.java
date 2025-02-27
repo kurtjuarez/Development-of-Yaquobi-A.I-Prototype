@@ -1,6 +1,8 @@
 package com.example.ilocanospeech_to_texttranslatorapp.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,10 +17,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.ilocanospeech_to_texttranslatorapp.R;
+import com.example.ilocanospeech_to_texttranslatorapp.asr.Recorder;
+import com.example.ilocanospeech_to_texttranslatorapp.asr.Whisper;
 import com.google.mlkit.nl.translate.TranslateLanguage;
 import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class HomePage extends Fragment {
 
@@ -31,6 +42,19 @@ public class HomePage extends Fragment {
     private static final String[] EXTENSIONS_TO_COPY = {"tflite", "bin", "wav", "pcm"};
     // Speech-to-Text variables
     private ImageView micBut;
+    private Recorder mRecord = null;
+    private Whisper mWhisper = null;
+
+    // Model and file type selector
+    private File sdcardDataFolder = null;
+    private File selectedWaveFile = null;
+    private File selectedTfliteFile = null;
+
+    //
+    private long startTime = 0;
+    private final boolean loopTesting = false;
+    private final SharedResource transcriptionSync = new SharedResource();
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     // Text-to-Text variables
     private EditText editTextIn;
@@ -86,6 +110,7 @@ public class HomePage extends Fragment {
             iloT.setText("");
             engT.setTextColor(getResources().getColor(R.color.black)); // Ensure default color
             iloT.setTextColor(getResources().getColor(R.color.black));
+            editTextIn.setTextColor(getResources().getColor(R.color.black));
             return;
         }
         engT.setTextColor(getResources().getColor(R.color.black)); // Change font color to black
@@ -105,6 +130,33 @@ public class HomePage extends Fragment {
         super.onDestroyView();
         if (translator != null) {
             translator.close(); // Clean up translator instance
+        }
+    }
+    static class SharedResource {
+        // Synchronized method for Thread 1 to wait for a signal with a timeout
+        public synchronized boolean waitForSignalWithTimeout(long timeoutMillis) {
+            long startTime = System.currentTimeMillis();
+
+            try {
+                wait(timeoutMillis);  // Wait for the given timeout
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();  // Restore interrupt status
+                return false;  // Thread interruption as timeout
+            }
+
+            long elapsedTime = System.currentTimeMillis() - startTime;
+
+            // Check if wait returned due to notify or timeout
+            if (elapsedTime < timeoutMillis) {
+                return true;  // Returned due to notify
+            } else {
+                return false;  // Returned due to timeout
+            }
+        }
+
+        // Synchronized method for Thread 2 to send a signal
+        public synchronized void sendSignal() {
+            notify();  // Notifies the waiting thread
         }
     }
 }

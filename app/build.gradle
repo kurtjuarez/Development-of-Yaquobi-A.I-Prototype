@@ -15,7 +15,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        buildConfig = true
+        viewBinding true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -25,6 +28,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
+    }
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets']
+        }
     }
 }
 
