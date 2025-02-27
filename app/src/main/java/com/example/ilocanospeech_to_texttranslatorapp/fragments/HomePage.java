@@ -23,6 +23,7 @@ import com.google.mlkit.nl.translate.TranslateLanguage;
 import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
+import com.google.cloud.translate.Translate;
 
 import java.io.File;
 import java.io.FileOutputStream;

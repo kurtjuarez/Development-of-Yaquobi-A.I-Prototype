@@ -34,6 +34,10 @@ android {
             assets.srcDirs = ['src/main/assets']
         }
     }
+    packaging{
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -46,6 +50,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    implementation libs.google.cloud.translate.v2240
 
     implementation libs.ffmpeg.full
     implementation libs.tensorflow.lite
