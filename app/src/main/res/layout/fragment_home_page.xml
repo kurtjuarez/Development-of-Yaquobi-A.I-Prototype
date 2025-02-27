@@ -34,7 +34,7 @@
             android:background="@drawable/rounded_text_layout"
             android:layout_marginStart="10dp">
             <EditText
-                android:id="@+id/editTextText5"
+                android:id="@+id/editTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -99,6 +99,7 @@
                 android:layout_below="@+id/english_text"
                 android:layout_marginStart="5dp"/>
             <TextView
+                android:id="@+id/eng_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/english_text"
@@ -126,6 +127,7 @@
                 android:layout_below="@+id/ilocano_text"
                 android:layout_marginStart="5dp"/>
             <TextView
+                android:id="@+id/ilo_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/ilocano_text"
